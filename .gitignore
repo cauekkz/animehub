@@ -1,0 +1,6 @@
+.vscode/
+legado/
+backend/public/routes/anime_player.php
+backend/uploads/
+*.zip
+.DS_Store

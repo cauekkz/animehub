@@ -1,0 +1,45 @@
+<section class="auth">
+    <div class="auth-art" aria-hidden="true" data-auth-art></div>
+
+    <div class="auth-panel">
+        <p class="eyebrow">É de graça</p>
+        <h1>Criar conta</h1>
+        <p class="muted">Salve sua lista e acompanhe cada episódio.</p>
+
+        <form class="form" novalidate data-form>
+            <div class="form-error" role="alert" hidden data-form-error></div>
+
+            <div class="field">
+                <label for="name">Nome</label>
+                <input id="name" name="name" type="text" autocomplete="name" minlength="3" maxlength="70" required>
+                <p class="field-error" id="name-error" hidden></p>
+            </div>
+
+            <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="100" required>
+                <p class="field-error" id="email-error" hidden></p>
+            </div>
+
+            <div class="field">
+                <label for="password">Senha</label>
+                <div class="password">
+                    <input id="password" name="password" type="password" autocomplete="new-password" minlength="8" maxlength="72" required aria-describedby="password-hint">
+                    <button type="button" class="reveal" aria-label="Mostrar senha" aria-pressed="false" data-reveal="password">Mostrar</button>
+                </div>
+                <p class="field-hint" id="password-hint">Pelo menos 8 caracteres.</p>
+                <p class="field-error" id="password-error" hidden></p>
+            </div>
+
+            <div class="field">
+                <label for="conf_password">Confirmar senha</label>
+                <input id="conf_password" name="conf_password" type="password" autocomplete="new-password" required>
+                <p class="field-error" id="conf_password-error" hidden></p>
+            </div>
+
+            <button class="btn btn-primary btn-block btn-lg" type="submit">Criar conta</button>
+        </form>
+
+        <p class="auth-switch">Já tem conta? <a href="/login" data-keep-next>Entrar</a></p>
+    </div>
+</section>

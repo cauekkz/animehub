@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0c0b0a">
+    <meta name="description" content="AnimeHub: descubra animes, acompanhe o que você está vendo e encontre onde assistir oficialmente.">
+    <title>AnimeHub</title>
+    <link rel="icon" href="/img/logo-black-mode.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://media.kitsu.app">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@500&display=swap">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+    <a class="skip-link" href="#app">Pular para o conteúdo</a>
+
+    <header class="site-header" data-scrolled="false">
+        <div class="header-row">
+            <button class="icon-btn burger" type="button" aria-label="Abrir menu" aria-controls="drawer" aria-expanded="false" data-action="open-drawer">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+            </button>
+
+            <a href="/" class="brand" aria-label="AnimeHub, início">
+                <img src="/img/logo-black-mode.png" alt="" width="613" height="407">
+            </a>
+
+            <nav class="main-nav" aria-label="Principal">
+                <a href="/" data-nav="home">Início</a>
+                <a href="/catalog" data-nav="catalog">Catálogo</a>
+                <a href="/list" data-nav="list">Minha lista</a>
+            </nav>
+
+            <form class="search" role="search" action="/catalog" data-search>
+                <label class="sr-only" for="search-input">Buscar anime</label>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                <input id="search-input" name="q" type="search" placeholder="Buscar anime" autocomplete="off" enterkeyhint="search">
+                <kbd aria-hidden="true">/</kbd>
+            </form>
+
+            <div class="account" data-account>
+                <a class="btn btn-ghost btn-sm" href="/login" data-guest>Entrar</a>
+                <div class="account-menu" data-user hidden>
+                    <button class="avatar" type="button" aria-haspopup="menu" aria-expanded="false" data-action="toggle-account">
+                        <span data-user-initial>?</span>
+                        <span class="sr-only">Abrir menu da conta</span>
+                    </button>
+                    <div class="menu" role="menu" hidden>
+                        <p class="menu-head"><span data-user-name></span><small data-user-email></small></p>
+                        <a role="menuitem" href="/list">Minha lista</a>
+                        <button role="menuitem" type="button" data-action="logout">Sair</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="genre-bar" aria-label="Gêneros">
+            <ul data-genre-bar></ul>
+        </nav>
+    </header>
+
+    <div class="drawer" id="drawer" hidden>
+        <div class="drawer-scrim" data-action="close-drawer"></div>
+        <aside class="drawer-panel" aria-label="Menu">
+            <div class="drawer-top">
+                <img src="/img/logo-black-mode.png" alt="AnimeHub" class="drawer-logo">
+                <button class="icon-btn" type="button" aria-label="Fechar menu" data-action="close-drawer">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+                </button>
+            </div>
+            <nav class="drawer-nav" aria-label="Menu do celular">
+                <a href="/">Início</a>
+                <a href="/catalog">Catálogo</a>
+                <a href="/list">Minha lista</a>
+            </nav>
+            <p class="eyebrow">Gêneros</p>
+            <ul class="drawer-genres" data-genre-list></ul>
+            <div class="drawer-account">
+                <div data-guest>
+                    <a class="btn btn-primary btn-block" href="/login">Entrar</a>
+                    <a class="btn btn-ghost btn-block" href="/signup">Criar conta</a>
+                </div>
+                <div data-user hidden>
+                    <p class="drawer-user"><span data-user-name></span><small data-user-email></small></p>
+                    <button class="btn btn-ghost btn-block" type="button" data-action="logout">Sair</button>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <main id="app" tabindex="-1"></main>
+
+    <footer class="site-footer">
+        <p>Dados de <a href="https://kitsu.app" target="_blank" rel="noopener">Kitsu</a>. Os episódios são assistidos nas plataformas oficiais.</p>
+        <p>AnimeHub, projeto escolar</p>
+    </footer>
+
+    <dialog class="anime-modal" id="anime-modal" aria-labelledby="modal-title">
+        <div class="modal-shell" data-modal-body></div>
+    </dialog>
+
+    <div class="toasts" aria-live="polite" aria-atomic="false" data-toasts></div>
+
+    <script type="module" src="/js/app.js"></script>
+</body>
+
+</html>

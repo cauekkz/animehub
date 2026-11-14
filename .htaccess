@@ -1,0 +1,29 @@
+Options -Indexes
+RewriteEngine On
+RewriteBase /
+
+DirectoryIndex frontend/index.html
+
+RewriteCond %{HTTP:Authorization} .
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+RewriteRule ^(backend/(_inc|vendor)|legado|docker|\.vscode)(/|$) - [F,L,NC]
+RewriteRule (^|/)(composer\.(json|lock)|docker-compose\.yml|Dockerfile)$ - [F,L,NC]
+RewriteRule \.(sql|md|zip|txt)$ - [F,L,NC]
+
+RewriteRule ^api/([a-zA-Z0-9_-]+)$ backend/public/routes/$1.php [L,NC,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^backend/public/routes/ backend/public/routes/404.php [L]
+
+RewriteRule ^css/(.+)$ frontend/static/css/$1 [L,NC]
+RewriteRule ^js/(.+)$ frontend/static/js/$1 [L,NC]
+RewriteRule ^img/(.+)$ frontend/static/img/$1 [L,NC]
+RewriteRule ^pages/([a-z0-9-]+\.html)$ frontend/pages/$1 [L,NC]
+
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+RewriteRule \.(css|js|png|jpe?g|gif|svg|webp|ico|html)$ - [R=404,L,NC]
+
+RewriteRule ^ frontend/index.html [L]

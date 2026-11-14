@@ -1,0 +1,39 @@
+name: animehub
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html:z
+    environment:
+      DB_HOST: db
+      DB_NAME: streaming
+      DB_USER: animehub
+      DB_PASS: animehub-dev
+      JWT_SECRET: troque-este-segredo-em-producao-9f2c4e7a1b3d5f60
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mariadb:11
+    environment:
+      MARIADB_ROOT_PASSWORD: root-dev
+      MARIADB_DATABASE: streaming
+      MARIADB_USER: animehub
+      MARIADB_PASSWORD: animehub-dev
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./backend/DDL.sql:/docker-entrypoint-initdb.d/01-ddl.sql:ro,z
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 3s
+      timeout: 5s
+      retries: 30
+
+volumes:
+  db-data:
