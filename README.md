@@ -15,6 +15,8 @@ Catálogo de animes com conta de usuário, **Minha lista** e **Continuar assisti
 
 <br>
 
+![Início](docs/home.jpg)
+
 ## Recursos
 
 - Navegar por fileiras de **Em alta**, **Em exibição** e por gênero (ação, romance, isekai...)
@@ -26,6 +28,18 @@ Catálogo de animes com conta de usuário, **Minha lista** e **Continuar assisti
 - Player de episódio pronto no front, com lista de episódios, anterior/próximo e avanço automático (a fonte do vídeo ainda não está ligada, veja [Player](#player))
 
 Os dados dos animes vêm da API pública do [Kitsu](https://kitsu.app). Contas, lista e progresso ficam no nosso banco.
+
+<br>
+
+![Fileiras](docs/fileiras.jpg)
+
+![Detalhes do anime](docs/detalhes.jpg)
+
+![Assistir](docs/assistir.jpg)
+
+<p align="center">
+  <img src="docs/mobile.jpg" alt="Versão mobile" width="320">
+</p>
 
 <br>
 
