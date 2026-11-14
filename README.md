@@ -15,7 +15,7 @@ Catálogo de animes com conta de usuário, **Minha lista** e **Continuar assisti
 
 <br>
 
-## O que dá pra fazer
+## Recursos
 
 - Navegar por fileiras de **Em alta**, **Em exibição** e por gênero (ação, romance, isekai...)
 - Buscar qualquer anime e filtrar o catálogo por gênero
@@ -26,6 +26,40 @@ Catálogo de animes com conta de usuário, **Minha lista** e **Continuar assisti
 - Player de episódio pronto no front, com lista de episódios, anterior/próximo e avanço automático (a fonte do vídeo ainda não está ligada, veja [Player](#player))
 
 Os dados dos animes vêm da API pública do [Kitsu](https://kitsu.app). Contas, lista e progresso ficam no nosso banco.
+
+<br>
+
+## Como usar o site
+
+### Início
+- No topo fica o **destaque**: cinco animes que trocam sozinhos. Passe o mouse em cima pra pausar, ou clique nos números pra escolher um.
+- Logo abaixo vêm as fileiras: **Em alta agora** (top 10), **Em exibição** e uma por gênero. Arraste pro lado ou use as setas.
+- Depois de entrar na conta, aparece também a fileira **Continuar assistindo**, com o último episódio que você abriu de cada anime. O **×** tira o anime da fileira.
+
+### Buscar e filtrar
+- Digite no campo **Buscar anime** do topo. Aperte **/** em qualquer página pra ir direto pra busca.
+- No **Catálogo**, os botões de gênero filtram a lista. **Carregar mais** traz mais resultados.
+- A barra de gêneros embaixo do header leva direto pro catálogo filtrado.
+
+### Detalhes do anime
+Clique em qualquer pôster pra abrir os detalhes: sinopse, nota, classificação indicativa, gêneros e onde assistir oficialmente. Dali dá pra:
+- **Assistir**: abre a página do anime. Se você já viu algum episódio, o botão vira **Continuar EP X**.
+- **Minha lista**: salva ou remove o anime da sua lista.
+- **Trailer**: toca o trailer oficial dentro da janela.
+
+### Assistir
+- Na página de assistir ficam o player, o nome do episódio, a sinopse e os botões **Anterior** e **Próximo**.
+- Embaixo vem a lista de episódios com thumbnail. Clique num episódio pra trocar sem recarregar a página. Animes longos são divididos em faixas de 20 (EP 1–20, 21–40...).
+- Cada episódio que você abre fica salvo no **Continuar assistindo**.
+- Sem fonte de vídeo ligada, o player mostra o aviso "ainda sem vídeo" e um botão pro trailer (veja [Player](#player)).
+
+### Conta
+- **Entrar → Criar conta**: nome, email e senha com pelo menos 8 caracteres. Você já entra direto depois de criar.
+- Assistir, salvar na lista e guardar o progresso pedem login. A sessão dura 7 dias.
+- Pra sair, clique na sua inicial no canto do header (no celular, fica no menu ☰) e depois em **Sair**.
+
+### Minha lista
+No menu, **Minha lista** mostra todos os animes que você salvou.
 
 <br>
 
