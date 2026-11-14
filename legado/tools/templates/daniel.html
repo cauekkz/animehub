@@ -1,0 +1,60 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   AnimeBeat Register
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+ </head>
+ <body class="bg-gradient-to-b from-[#0B0B2B] to-[#1B1464] min-h-screen flex flex-col">
+  <div class="flex justify-between items-center p-6 max-w-[1200px] mx-auto w-full rounded-2xl overflow-hidden" style="background: url('https://placehold.co/1200x600/0B2F5A/0B2F5A') center/cover no-repeat;">
+   <div class="text-white font-semibold text-lg select-none">
+    ANIMEBEAT
+   </div>
+   <div class="flex space-x-4">
+    <button class="text-white text-xs font-semibold border border-white rounded px-4 py-2 hover:bg-white hover:text-[#0B2F5A] transition">
+     LOG IN
+    </button>
+    <button class="text-white text-xs font-semibold border border-white rounded px-4 py-2 hover:bg-white hover:text-[#0B2F5A] transition">
+     REGISTER
+    </button>
+   </div>
+   <div class="absolute inset-0 flex justify-center items-center pointer-events-none">
+    <img alt="Blurred anime character with blue and purple tones" class="pointer-events-none rounded-2xl opacity-40" height="400" src="https://storage.googleapis.com/a1aa/image/3b62c34d-552d-4853-c9e7-95d0f7d0d309.jpg" width="400"/>
+   </div>
+   <form aria-label="Register form" class="relative z-10 bg-gradient-to-b from-[#1B1464] to-[#1B0F3D] rounded-lg p-8 w-80 text-white shadow-lg">
+    <button aria-label="Close register form" class="absolute top-3 right-3 text-purple-400 text-lg font-bold leading-none hover:text-purple-300" type="button">
+     ×
+    </button>
+    <h2 class="text-center font-semibold text-xl mb-6 select-none">
+     Register
+    </h2>
+    <input class="w-full bg-transparent border-b border-gray-500 placeholder-gray-500 py-2 mb-6 text-sm focus:outline-none focus:border-blue-400" placeholder="Email address" required="" type="email"/>
+    <input class="w-full bg-transparent border-b border-gray-500 placeholder-gray-500 py-2 mb-6 text-sm focus:outline-none focus:border-blue-400" placeholder="Password" required="" type="password"/>
+    <button class="w-full bg-blue-500 hover:bg-blue-600 transition rounded py-2 text-sm font-normal" type="submit">
+     Create account
+    </button>
+    <p class="text-center text-xs mt-4 text-gray-300">
+     Already have an account?
+     <a class="text-gray-400 hover:text-gray-200" href="#">
+      Log In
+     </a>
+    </p>
+   </form>
+  </div>
+  <div class="flex justify-end px-6 pt-4 max-w-[1200px] mx-auto w-full">
+   <span class="text-white text-lg select-none">
+    4
+   </span>
+  </div>
+ </body>
+</html>
