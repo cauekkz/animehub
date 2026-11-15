@@ -4,7 +4,7 @@
 
 # AnimeHub
 
-Catálogo de animes com conta de usuário, **Minha lista** e **Continuar assistindo**.
+Anime catalog with user accounts, **My list** and **Continue watching**.
 
 ![PHP](https://img.shields.io/badge/PHP_8.3-1f1f1f?style=flat-square&logo=php&logoColor=777bb4)
 ![MariaDB](https://img.shields.io/badge/MariaDB-1f1f1f?style=flat-square&logo=mariadb&logoColor=c0765a)
@@ -15,194 +15,196 @@ Catálogo de animes com conta de usuário, **Minha lista** e **Continuar assisti
 
 <br>
 
-![Início](docs/home.jpg)
+![Home](docs/home.jpg)
 
-## Recursos
+## Features
 
-- Navegar por fileiras de **Em alta**, **Em exibição** e por gênero (ação, romance, isekai...)
-- Buscar qualquer anime e filtrar o catálogo por gênero
-- Ver detalhes: sinopse, nota, classificação indicativa, gêneros, trailer e onde assistir oficialmente
-- Criar conta e entrar
-- Salvar animes na **Minha lista**
-- Abrir episódios (com thumbnail e sinopse); o site lembra onde você parou e mostra em **Continuar assistindo**
-- Player de episódio pronto no front, com lista de episódios, anterior/próximo e avanço automático (a fonte do vídeo ainda não está ligada, veja [Player](#player))
+- Browse rows of **Trending**, **Airing now** and by genre (action, romance, isekai...)
+- Search any anime and filter the catalog by genre
+- See details: synopsis, rating, age rating, genres, trailer and where to watch officially
+- Create an account and log in
+- Save anime to **My list**
+- Open episodes (with thumbnail and synopsis); the site remembers where you stopped and shows it in **Continue watching**
+- Episode player ready on the front end, with episode list, previous/next and autoplay (the video source isn't wired up yet, see [Player](#player))
 
-Os dados dos animes vêm da API pública do [Kitsu](https://kitsu.app). Contas, lista e progresso ficam no nosso banco.
+Anime data comes from the public [Kitsu](https://kitsu.app) API. Accounts, lists and progress live in our own database.
+
+> The interface is in Portuguese.
 
 <br>
 
-![Fileiras](docs/fileiras.jpg)
+![Rows](docs/fileiras.jpg)
 
-![Detalhes do anime](docs/detalhes.jpg)
+![Anime details](docs/detalhes.jpg)
 
-![Assistir](docs/assistir.jpg)
+![Watch](docs/assistir.jpg)
 
 <p align="center">
-  <img src="docs/mobile.jpg" alt="Versão mobile" width="320">
+  <img src="docs/mobile.jpg" alt="Mobile version" width="320">
 </p>
 
 <br>
 
-## Como usar o site
+## Using the site
 
-### Início
-- No topo fica o **destaque**: cinco animes que trocam sozinhos. Passe o mouse em cima pra pausar, ou clique nos números pra escolher um.
-- Logo abaixo vêm as fileiras: **Em alta agora** (top 10), **Em exibição** e uma por gênero. Arraste pro lado ou use as setas.
-- Depois de entrar na conta, aparece também a fileira **Continuar assistindo**, com o último episódio que você abriu de cada anime. O **×** tira o anime da fileira.
+### Home
+- At the top is the **spotlight**: five anime that rotate on their own. Hover to pause, or click the numbers to pick one.
+- Below come the rows: **Trending now** (top 10), **Airing now** and one per genre. Drag sideways or use the arrows.
+- Once you're logged in, a **Continue watching** row also shows up, with the last episode you opened of each anime. The **×** removes the anime from the row.
 
-### Buscar e filtrar
-- Digite no campo **Buscar anime** do topo. Aperte **/** em qualquer página pra ir direto pra busca.
-- No **Catálogo**, os botões de gênero filtram a lista. **Carregar mais** traz mais resultados.
-- A barra de gêneros embaixo do header leva direto pro catálogo filtrado.
+### Search and filter
+- Type in the **Search anime** field at the top. Press **/** on any page to jump straight to search.
+- In the **Catalog**, the genre buttons filter the list. **Load more** brings more results.
+- The genre bar under the header goes straight to the filtered catalog.
 
-### Detalhes do anime
-Clique em qualquer pôster pra abrir os detalhes: sinopse, nota, classificação indicativa, gêneros e onde assistir oficialmente. Dali dá pra:
-- **Assistir**: abre a página do anime. Se você já viu algum episódio, o botão vira **Continuar EP X**.
-- **Minha lista**: salva ou remove o anime da sua lista.
-- **Trailer**: toca o trailer oficial dentro da janela.
+### Anime details
+Click any poster to open the details: synopsis, rating, age rating, genres and where to watch officially. From there you can:
+- **Watch**: opens the anime page. If you've already seen an episode, the button becomes **Continue EP X**.
+- **My list**: saves or removes the anime from your list.
+- **Trailer**: plays the official trailer inside the window.
 
-### Assistir
-- Na página de assistir ficam o player, o nome do episódio, a sinopse e os botões **Anterior** e **Próximo**.
-- Embaixo vem a lista de episódios com thumbnail. Clique num episódio pra trocar sem recarregar a página. Animes longos são divididos em faixas de 20 (EP 1–20, 21–40...).
-- Cada episódio que você abre fica salvo no **Continuar assistindo**.
-- Sem fonte de vídeo ligada, o player mostra o aviso "ainda sem vídeo" e um botão pro trailer (veja [Player](#player)).
+### Watch
+- The watch page has the player, the episode title, the synopsis and **Previous** / **Next** buttons.
+- Below is the episode list with thumbnails. Click an episode to switch without reloading the page. Long series are split into ranges of 20 (EP 1–20, 21–40...).
+- Every episode you open is saved to **Continue watching**.
+- With no video source wired up, the player shows a "no video yet" notice and a button to the trailer (see [Player](#player)).
 
-### Conta
-- **Entrar → Criar conta**: nome, email e senha com pelo menos 8 caracteres. Você já entra direto depois de criar.
-- Assistir, salvar na lista e guardar o progresso pedem login. A sessão dura 7 dias.
-- Pra sair, clique na sua inicial no canto do header (no celular, fica no menu ☰) e depois em **Sair**.
+### Account
+- **Log in → Create account**: name, email and a password with at least 8 characters. You're logged in right after signing up.
+- Watching, saving to your list and keeping progress require login. Sessions last 7 days.
+- To log out, click your initial in the corner of the header (on mobile it's in the ☰ menu), then **Log out**.
 
-### Minha lista
-No menu, **Minha lista** mostra todos os animes que você salvou.
+### My list
+In the menu, **My list** shows every anime you've saved.
 
 <br>
 
-## Como rodar
+## How to run
 
-### 1. Instale o Docker
+### 1. Install Docker
 
 - **Windows / Mac:** [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- **Linux:** Docker Engine + plugin Compose (`docker compose version` precisa funcionar)
+- **Linux:** Docker Engine + the Compose plugin (`docker compose version` must work)
 
-Não precisa instalar PHP, Apache nem MySQL. Tudo roda dentro dos containers.
+No need to install PHP, Apache or MySQL. Everything runs inside the containers.
 
-### 2. Suba o projeto
+### 2. Start the project
 
-Dentro da pasta do projeto:
+Inside the project folder:
 
 ```bash
 docker compose up -d --build
 ```
 
-A primeira vez demora um pouco (baixa as imagens e cria o banco). Depois é rápido.
+The first run takes a while (it pulls the images and creates the database). After that it's quick.
 
-### 3. Abra no navegador
+### 3. Open it in the browser
 
 **http://localhost:8080**
 
-Crie uma conta em **Entrar → Criar conta** e pronto.
+Create an account under **Log in → Create account** and you're set.
 
 <br>
 
-## Comandos úteis
+## Useful commands
 
-| Comando | Para quê |
+| Command | What for |
 |---|---|
-| `docker compose up -d` | liga o site |
-| `docker compose down` | desliga (as contas continuam salvas) |
-| `docker compose down -v` | desliga e **apaga o banco** (começa do zero) |
-| `docker compose logs -f web` | ver erros do PHP/Apache |
-| `docker compose exec db mariadb -uanimehub -panimehub-dev streaming` | abrir o banco no terminal |
+| `docker compose up -d` | start the site |
+| `docker compose down` | stop it (accounts are kept) |
+| `docker compose down -v` | stop it and **wipe the database** (start from scratch) |
+| `docker compose logs -f web` | see PHP/Apache errors |
+| `docker compose exec db mariadb -uanimehub -panimehub-dev streaming` | open the database in the terminal |
 
 <br>
 
-## Problemas comuns
+## Common issues
 
-**A porta 8080 já está em uso**
-Troque no `docker-compose.yml`: `"8080:80"` → `"8081:80"` e acesse `localhost:8081`.
+**Port 8080 is already in use**
+Change it in `docker-compose.yml`: `"8080:80"` → `"8081:80"` and open `localhost:8081`.
 
-**Página em branco ou erro 403 no Linux (Fedora, etc.)**
-É o SELinux. Os volumes já têm `:z` no `docker-compose.yml`; se tirou, coloque de volta.
+**Blank page or 403 error on Linux (Fedora, etc.)**
+That's SELinux. The volumes already have `:z` in `docker-compose.yml`; if you removed it, put it back.
 
-**Mudei o `DDL.sql` e nada aconteceu**
-O banco só é criado na primeira vez. Rode `docker compose down -v` e suba de novo.
+**I changed `DDL.sql` and nothing happened**
+The database is only created the first time. Run `docker compose down -v` and start it again.
 
-**Fileiras não carregam**
-O site precisa de internet para buscar os animes no Kitsu.
+**Rows don't load**
+The site needs internet access to fetch anime from Kitsu.
 
 <br>
 
-## Como funciona
+## How it works
 
 ```
-Navegador ──► Apache (.htaccess)
+Browser ──► Apache (.htaccess)
                ├─ /api/*          ─► backend/public/routes/*.php ─► MariaDB
                ├─ /css /js /img   ─► frontend/static/
-               └─ qualquer outra  ─► frontend/index.html (SPA)
+               └─ anything else   ─► frontend/index.html (SPA)
 
-Navegador ──► API do Kitsu (catálogo, episódios, trailers)
+Browser ──► Kitsu API (catalog, episodes, trailers)
 ```
 
-O frontend é uma SPA em JavaScript puro: o `index.html` tem o header e o modal, e cada página é um pedaço de HTML em `frontend/pages/` com sua lógica em `frontend/static/js/pages/`.
+The front end is a plain JavaScript SPA: `index.html` holds the header and the modal, and each page is an HTML fragment in `frontend/pages/` with its logic in `frontend/static/js/pages/`.
 
-### Pastas
+### Folders
 
 ```
 backend/
-  _inc/                  configuração, conexão com o banco, JWT, validação
-  public/routes/         rotas da API (login, signup, me, list, progress)
-  DDL.sql                cria as tabelas
+  _inc/                  config, database connection, JWT, validation
+  public/routes/         API routes (login, signup, me, list, progress)
+  DDL.sql                creates the tables
 frontend/
-  index.html             casca do site: header, menu do celular, modal
-  pages/                 HTML de cada página
-  static/css/main.css    todo o visual (cores e fontes no topo do arquivo)
-  static/js/app.js       roteador + header
-  static/js/kitsu.js     busca dados no Kitsu
-  static/js/api.js       fala com o nosso backend
-  static/js/ui.js        cards, fileiras, modal, avisos
-  static/js/player.js    player do episódio (fonte do vídeo em getEpisodeSource)
-  static/js/pages/       lógica de cada página
-docker/                  Dockerfile e configuração do Apache
+  index.html             site shell: header, mobile menu, modal
+  pages/                 HTML for each page
+  static/css/main.css    all the styling (colors and fonts at the top of the file)
+  static/js/app.js       router + header
+  static/js/kitsu.js     fetches data from Kitsu
+  static/js/api.js       talks to our backend
+  static/js/ui.js        cards, rows, modal, notices
+  static/js/player.js    episode player (video source in getEpisodeSource)
+  static/js/pages/       logic for each page
+docker/                  Dockerfile and Apache config
 ```
 
 ### Player
 
-A tela `/watch?id=<kitsu>&ep=<n>` monta o player em `static/js/player.js`. Para cada episódio ela chama:
+The `/watch?id=<kitsu>&ep=<n>` screen builds the player in `static/js/player.js`. For each episode it calls:
 
 ```js
-getEpisodeSource(anime, ep) // -> { url, type: "video" | "iframe" } ou null
+getEpisodeSource(anime, ep) // -> { url, type: "video" | "iframe" } or null
 ```
 
-Hoje essa função devolve `null`, então o player mostra a capa do episódio com o aviso "ainda sem vídeo" e um botão para o trailer. Para ligar vídeos (arquivos próprios, vídeos seus no YouTube, conteúdo licenciado), basta devolver a URL ali:
+Right now this function returns `null`, so the player shows the episode cover with a "no video yet" notice and a button to the trailer. To hook up videos (your own files, your own YouTube videos, licensed content), just return the URL there:
 
-- `type: "video"`: arquivo direto (`.mp4`, `.webm`) tocado no `<video>` do site; ao terminar, passa para o próximo episódio
-- `type: "iframe"`: player embutido
+- `type: "video"`: a direct file (`.mp4`, `.webm`) played in the site's `<video>`; when it ends, it moves on to the next episode
+- `type: "iframe"`: an embedded player
 
 ### API
 
-| Rota | Método | Precisa login | O que faz |
+| Route | Method | Login | What it does |
 |---|---|:---:|---|
-| `/api/signup` | POST | | cria a conta e já devolve o token |
-| `/api/login` | POST | | devolve `{ token, user }` |
-| `/api/me` | GET | ✓ | dados de quem está logado |
-| `/api/list` | GET · POST · DELETE | ✓ | Minha lista |
-| `/api/progress` | GET · POST · DELETE | ✓ | último episódio de cada anime |
+| `/api/signup` | POST | | creates the account and returns the token |
+| `/api/login` | POST | | returns `{ token, user }` |
+| `/api/me` | GET | ✓ | data for the logged-in user |
+| `/api/list` | GET · POST · DELETE | ✓ | My list |
+| `/api/progress` | GET · POST · DELETE | ✓ | last episode of each anime |
 
-Rotas com login esperam o header `Authorization: Bearer <token>`.
+Routes that need login expect the `Authorization: Bearer <token>` header.
 
-### Banco
+### Database
 
-| Tabela | Guarda |
+| Table | Stores |
 |---|---|
-| `user` | nome, email e senha (com hash) |
-| `watchlist` | animes salvos por usuário |
-| `progress` | último episódio aberto de cada anime |
+| `user` | name, email and password (hashed) |
+| `watchlist` | anime saved per user |
+| `progress` | last episode opened of each anime |
 
 <br>
 
-## Rodar sem Docker (XAMPP/WAMP)
+## Running without Docker (XAMPP/WAMP)
 
-1. Copie a pasta do projeto para `htdocs` e deixe ela como **raiz** do site (o `.htaccess` usa caminhos a partir de `/`)
-2. Ative o `mod_rewrite` e `AllowOverride All`
-3. Rode o `backend/DDL.sql` no MySQL
-4. Ajuste usuário e senha do banco em `backend/_inc/config.php` (ou pelas variáveis `DB_HOST`, `DB_USER`, `DB_PASS`)
+1. Copy the project folder into `htdocs` and make it the site's **root** (`.htaccess` uses paths starting at `/`)
+2. Enable `mod_rewrite` and `AllowOverride All`
+3. Run `backend/DDL.sql` in MySQL
+4. Set the database user and password in `backend/_inc/config.php` (or via the `DB_HOST`, `DB_USER`, `DB_PASS` variables)
