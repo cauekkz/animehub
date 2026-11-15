@@ -53,7 +53,7 @@ export async function api(path, { method = "GET", body, query } = {}) {
     try {
         res = await fetch(url, { method, headers, body: body !== undefined ? JSON.stringify(body) : undefined });
     } catch {
-        throw new ApiError("Sem conexão com o servidor", 0);
+        throw new ApiError("No connection to the server", 0);
     }
 
     let json = null;
@@ -62,7 +62,7 @@ export async function api(path, { method = "GET", body, query } = {}) {
     if (!res.ok || json?.status !== "success") {
         if (res.status === 401 && session.token) session.clear();
         const fields = json?.data && typeof json.data === "object" && !Array.isArray(json.data) ? json.data : null;
-        throw new ApiError(json?.error_message || `Erro ${res.status}`, res.status, fields);
+        throw new ApiError(json?.error_message || `Error ${res.status}`, res.status, fields);
     }
 
     return json.data;

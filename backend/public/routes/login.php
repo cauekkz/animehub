@@ -9,7 +9,7 @@ $data = read_json_body();
 $errors = validatelogin($data);
 
 if (!empty($errors)) {
-    $res->fail('Confira os campos', 422, $errors);
+    $res->fail('Please check the fields', 422, $errors);
 }
 
 $email = mb_strtolower(trim($data['email']));
@@ -20,11 +20,11 @@ $response = $db->execute_query(
 );
 
 if ($response->status !== 'success') {
-    $res->fail('Não foi possível entrar agora, tente de novo', 500);
+    $res->fail("Couldn't log you in right now, try again", 500);
 }
 
 if (empty($response->results) || !password_verify($data['password'], $response->results[0]->password)) {
-    $res->fail('Email ou senha incorretos', 401);
+    $res->fail('Wrong email or password', 401);
 }
 
 $user = $response->results[0];

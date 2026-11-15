@@ -49,9 +49,9 @@ function setup(root, params, { validate, submit, successMessage }) {
         const input = form.elements[btn.dataset.reveal];
         const show = input.type === "password";
         input.type = show ? "text" : "password";
-        btn.textContent = show ? "Ocultar" : "Mostrar";
+        btn.textContent = show ? "Hide" : "Show";
         btn.setAttribute("aria-pressed", show);
-        btn.setAttribute("aria-label", show ? "Ocultar senha" : "Mostrar senha");
+        btn.setAttribute("aria-label", show ? "Hide password" : "Show password");
     }));
 
     form.addEventListener("focusout", (e) => {
@@ -82,7 +82,7 @@ function setup(root, params, { validate, submit, successMessage }) {
 
         button.disabled = true;
         const label = button.textContent;
-        button.innerHTML = `<span class="spinner spinner-sm" aria-hidden="true"></span><span>Aguarde…</span>`;
+        button.innerHTML = `<span class="spinner spinner-sm" aria-hidden="true"></span><span>Please wait…</span>`;
         try {
             const { token, user } = await submit(data);
             session.set(token, user);
@@ -111,12 +111,12 @@ export function login(root, params) {
     setup(root, params, {
         validate: (d) => {
             const errors = {};
-            if (!emailOk(d.email)) errors.email = "Digite um email válido";
-            if (!d.password) errors.password = "Digite sua senha";
+            if (!emailOk(d.email)) errors.email = "Enter a valid email";
+            if (!d.password) errors.password = "Enter your password";
             return errors;
         },
         submit: (d) => auth.login(d.email.trim(), d.password),
-        successMessage: (u) => `Oi, ${u.name.split(" ")[0]}!`,
+        successMessage: (u) => `Hi, ${u.name.split(" ")[0]}!`,
     });
 }
 
@@ -124,13 +124,13 @@ export function signup(root, params) {
     setup(root, params, {
         validate: (d) => {
             const errors = {};
-            if ((d.name || "").trim().length < 3) errors.name = "O nome precisa ter pelo menos 3 letras";
-            if (!emailOk(d.email)) errors.email = "Digite um email válido";
-            if ((d.password || "").length < 8) errors.password = "A senha precisa ter pelo menos 8 caracteres";
-            if (d.conf_password !== d.password) errors.conf_password = "As senhas não são iguais";
+            if ((d.name || "").trim().length < 3) errors.name = "Your name needs at least 3 letters";
+            if (!emailOk(d.email)) errors.email = "Enter a valid email";
+            if ((d.password || "").length < 8) errors.password = "The password needs at least 8 characters";
+            if (d.conf_password !== d.password) errors.conf_password = "The passwords don't match";
             return errors;
         },
         submit: (d) => auth.signup({ name: d.name.trim(), email: d.email.trim(), password: d.password, conf_password: d.conf_password }),
-        successMessage: (u) => `Conta criada. Bem-vindo, ${u.name.split(" ")[0]}!`,
+        successMessage: (u) => `Account created. Welcome, ${u.name.split(" ")[0]}!`,
     });
 }

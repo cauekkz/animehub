@@ -29,15 +29,13 @@ Anime catalog with user accounts, **My list** and **Continue watching**.
 
 Anime data comes from the public [Kitsu](https://kitsu.app) API. Accounts, lists and progress live in our own database.
 
-> The interface is in Portuguese.
-
 <br>
 
-![Rows](docs/fileiras.jpg)
+![Rows](docs/rows.jpg)
 
-![Anime details](docs/detalhes.jpg)
+![Anime details](docs/details.jpg)
 
-![Watch](docs/assistir.jpg)
+![Watch](docs/watch.jpg)
 
 <p align="center">
   <img src="docs/mobile.jpg" alt="Mobile version" width="320">

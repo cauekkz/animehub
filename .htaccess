@@ -7,7 +7,7 @@ DirectoryIndex frontend/index.html
 RewriteCond %{HTTP:Authorization} .
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-RewriteRule ^(backend/(_inc|vendor)|legado|docker|\.vscode)(/|$) - [F,L,NC]
+RewriteRule ^(backend/(_inc|vendor)|legacy|docker|\.vscode)(/|$) - [F,L,NC]
 RewriteRule (^|/)(composer\.(json|lock)|docker-compose\.yml|Dockerfile)$ - [F,L,NC]
 RewriteRule \.(sql|md|zip|txt)$ - [F,L,NC]
 

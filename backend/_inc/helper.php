@@ -5,7 +5,7 @@ function require_method(...$allowed)
     $method = $_SERVER['REQUEST_METHOD'];
     if (!in_array($method, $allowed, true)) {
         header('Allow: ' . implode(', ', $allowed));
-        $res->fail('Método não permitido', 405);
+        $res->fail('Method not allowed', 405);
     }
     return $method;
 }

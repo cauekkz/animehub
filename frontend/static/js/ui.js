@@ -30,12 +30,12 @@ export function ageBadge(rating) {
     const map = { G: ["L", "l"], PG: ["12", "12"], R: ["16", "16"], R18: ["18", "18"] };
     const [label, cls] = map[rating] ?? [null, null];
     if (!label) return "";
-    const title = label === "L" ? "Livre para todos os públicos" : `Não recomendado para menores de ${label} anos`;
+    const title = label === "L" ? "Suitable for all ages" : `Not recommended for viewers under ${label}`;
     return `<span class="age age-${cls}" title="${title}">${label}</span>`;
 }
 
-const SUBTYPES = { TV: "Série", movie: "Filme", OVA: "OVA", ONA: "ONA", special: "Especial", music: "Clipe" };
-const STATUS = { current: "Em exibição", finished: "Finalizado", upcoming: "Em breve", tba: "A anunciar", unreleased: "Não lançado" };
+const SUBTYPES = { TV: "Series", movie: "Movie", OVA: "OVA", ONA: "ONA", special: "Special", music: "Music video" };
+const STATUS = { current: "Airing", finished: "Finished", upcoming: "Upcoming", tba: "TBA", unreleased: "Unreleased" };
 
 export function metaLine(anime, { long = false } = {}) {
     const parts = [];
@@ -89,12 +89,12 @@ export function continueCardHTML(item) {
             <span class="card-poster">
                 ${img ? `<img src="${esc(img)}" alt="" loading="lazy" decoding="async" onerror="this.remove()">` : ""}
                 <span class="card-play">${icon("play")}</span>
-                ${pct !== null ? `<span class="progress" role="img" aria-label="${pct}% assistido"><span style="width:${pct}%"></span></span>` : ""}
+                ${pct !== null ? `<span class="progress" role="img" aria-label="${pct}% watched"><span style="width:${pct}%"></span></span>` : ""}
             </span>
             <span class="card-title">${esc(item.title)}</span>
-            <span class="card-meta"><span class="mono">EP ${String(item.episode).padStart(2, "0")}</span>${item.episode_count ? `<span>de ${item.episode_count}</span>` : ""}</span>
+            <span class="card-meta"><span class="mono">EP ${String(item.episode).padStart(2, "0")}</span>${item.episode_count ? `<span>of ${item.episode_count}</span>` : ""}</span>
         </a>
-        <button type="button" class="card-remove" data-remove-progress="${esc(item.anime_id)}" aria-label="Tirar ${esc(item.title)} de Continuar assistindo">${icon("close")}</button>
+        <button type="button" class="card-remove" data-remove-progress="${esc(item.anime_id)}" aria-label="Remove ${esc(item.title)} from Continue watching">${icon("close")}</button>
     </li>`;
 }
 
@@ -105,12 +105,12 @@ export function createRail({ id, title, href, load, max = 60, ranked = false, ea
     section.innerHTML = `
         <header class="rail-head">
             <h2 id="rail-${id}">${esc(title)}</h2>
-            ${href ? `<a class="rail-more" href="${href}">Ver tudo ${icon("right")}</a>` : ""}
+            ${href ? `<a class="rail-more" href="${href}">See all ${icon("right")}</a>` : ""}
         </header>
         <div class="rail-viewport">
-            <button class="rail-arrow prev" type="button" aria-label="Voltar fileira ${esc(title)}" hidden>${icon("left")}</button>
+            <button class="rail-arrow prev" type="button" aria-label="Scroll ${esc(title)} row back" hidden>${icon("left")}</button>
             <ul class="rail-track${ranked ? " is-ranked" : ""}">${skeletonCards(8)}</ul>
-            <button class="rail-arrow next" type="button" aria-label="Avançar fileira ${esc(title)}">${icon("right")}</button>
+            <button class="rail-arrow next" type="button" aria-label="Scroll ${esc(title)} row forward">${icon("right")}</button>
         </div>`;
 
     const track = $(".rail-track", section);
@@ -132,7 +132,7 @@ export function createRail({ id, title, href, load, max = 60, ranked = false, ea
             updateArrows();
         } catch (err) {
             if (offset === 0) {
-                track.innerHTML = `<li class="rail-error">Não deu para carregar esta fileira. <button type="button" class="link">Tentar de novo</button></li>`;
+                track.innerHTML = `<li class="rail-error">Couldn't load this row. <button type="button" class="link">Try again</button></li>`;
                 $(".link", track).onclick = () => { track.innerHTML = skeletonCards(8); more(); };
             }
         } finally {
@@ -185,13 +185,13 @@ export async function bindListButton(btn, anime) {
     const paint = (saved) => {
         btn.dataset.saved = saved;
         btn.setAttribute("aria-pressed", saved);
-        btn.innerHTML = saved ? `${icon("check")}<span>Na sua lista</span>` : `${icon("plus")}<span>Minha lista</span>`;
+        btn.innerHTML = saved ? `${icon("check")}<span>In your list</span>` : `${icon("plus")}<span>My list</span>`;
     };
     paint(await watchlist.has(anime.id).catch(() => false));
 
     btn.onclick = async () => {
         if (!session.loggedIn) {
-            toast("Entre na sua conta para salvar animes");
+            toast("Log in to save anime");
             window.navigate(`/login?next=${encodeURIComponent(location.pathname + location.search)}`);
             return;
         }
@@ -201,7 +201,7 @@ export async function bindListButton(btn, anime) {
             if (saved) await watchlist.remove(anime.id);
             else await watchlist.add(anime);
             paint(!saved);
-            toast(saved ? "Removido da sua lista" : "Salvo na sua lista");
+            toast(saved ? "Removed from your list" : "Saved to your list");
         } catch (err) {
             toast(err.message, { tone: "error" });
         } finally {
@@ -215,24 +215,24 @@ const modal = () => $("#anime-modal");
 function modalHTML(a, { loadingExtras }) {
     const backdrop = a.cover || a.posterLarge || a.poster;
     return `
-    <button class="icon-btn modal-close" type="button" aria-label="Fechar" data-close-modal>${icon("close")}</button>
+    <button class="icon-btn modal-close" type="button" aria-label="Close" data-close-modal>${icon("close")}</button>
     <div class="modal-hero">
         ${backdrop ? `<img class="modal-backdrop" src="${esc(backdrop)}" alt="" decoding="async">` : ""}
         <div class="modal-trailer" hidden></div>
     </div>
     <div class="modal-content">
-        <div class="modal-poster">${a.posterLarge || a.poster ? `<img src="${esc(a.posterLarge || a.poster)}" alt="Pôster de ${esc(a.title)}">` : ""}</div>
+        <div class="modal-poster">${a.posterLarge || a.poster ? `<img src="${esc(a.posterLarge || a.poster)}" alt="${esc(a.title)} poster">` : ""}</div>
         <div class="modal-main">
             <p class="meta">${ageBadge(a.ageRating)}${metaLine(a, { long: true })}</p>
             <h2 id="modal-title" class="modal-title">${esc(a.title)}</h2>
             ${a.altTitle && a.altTitle !== a.title ? `<p class="alt-title" lang="ja">${esc(a.altTitle)}</p>` : ""}
-            ${a.rating ? `<p class="score-big">${icon("star")}<strong>${esc(a.rating)}</strong><span>/10 no Kitsu</span></p>` : ""}
+            ${a.rating ? `<p class="score-big">${icon("star")}<strong>${esc(a.rating)}</strong><span>/10 on Kitsu</span></p>` : ""}
             <div class="actions">
-                <a class="btn btn-primary" href="/watch?id=${encodeURIComponent(a.id)}" data-watch>${icon("play")}<span>Assistir</span></a>
-                <button class="btn btn-ghost" type="button" data-list-btn>${icon("plus")}<span>Minha lista</span></button>
+                <a class="btn btn-primary" href="/watch?id=${encodeURIComponent(a.id)}" data-watch>${icon("play")}<span>Watch</span></a>
+                <button class="btn btn-ghost" type="button" data-list-btn>${icon("plus")}<span>My list</span></button>
                 ${a.youtube ? `<button class="btn btn-ghost" type="button" data-trailer>${icon("film")}<span>Trailer</span></button>` : ""}
             </div>
-            <p class="synopsis">${esc(a.synopsis || "Sem sinopse disponível.")}</p>
+            <p class="synopsis">${esc(a.synopsis || "No synopsis available.")}</p>
             <div class="modal-extras">${loadingExtras ? `<span class="sk-line"></span><span class="sk-line short"></span>` : ""}</div>
         </div>
     </div>`;
@@ -244,9 +244,9 @@ function extrasHTML(a) {
     const streams = (a.streams ?? []).map(s =>
         `<li><a class="stream" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.site)}${icon("external")}</a></li>`).join("");
     return `
-        ${genres ? `<div class="extras-block"><h3 class="eyebrow">Gêneros</h3><ul class="chips">${genres}</ul></div>` : ""}
-        <div class="extras-block"><h3 class="eyebrow">Onde assistir</h3>
-            ${streams ? `<ul class="streams">${streams}</ul>` : `<p class="muted">Ainda não temos links oficiais para este título.</p>`}
+        ${genres ? `<div class="extras-block"><h3 class="eyebrow">Genres</h3><ul class="chips">${genres}</ul></div>` : ""}
+        <div class="extras-block"><h3 class="eyebrow">Where to watch</h3>
+            ${streams ? `<ul class="streams">${streams}</ul>` : `<p class="muted">We don't have official links for this title yet.</p>`}
         </div>`;
 }
 
@@ -255,7 +255,7 @@ export async function openAnime(id) {
     const body = $("[data-modal-body]", dialog);
     const quick = recall(id);
 
-    body.innerHTML = quick ? modalHTML(quick, { loadingExtras: true }) : `<div class="modal-loading"><span class="spinner" aria-label="Carregando"></span></div>`;
+    body.innerHTML = quick ? modalHTML(quick, { loadingExtras: true }) : `<div class="modal-loading"><span class="spinner" aria-label="Loading"></span></div>`;
     if (!dialog.open) dialog.showModal();
     dialog.scrollTop = 0;
 
@@ -263,8 +263,8 @@ export async function openAnime(id) {
     try {
         anime = remember(await kitsu.details(id));
     } catch {
-        if (!quick) body.innerHTML = `<button class="icon-btn modal-close" type="button" aria-label="Fechar" data-close-modal>${icon("close")}</button><p class="modal-error">Não foi possível carregar este anime.</p>`;
-        else $(".modal-extras", body).innerHTML = `<p class="muted">Não foi possível carregar os detalhes.</p>`;
+        if (!quick) body.innerHTML = `<button class="icon-btn modal-close" type="button" aria-label="Close" data-close-modal>${icon("close")}</button><p class="modal-error">Couldn't load this anime.</p>`;
+        else $(".modal-extras", body).innerHTML = `<p class="muted">Couldn't load the details.</p>`;
         return;
     }
     if (!dialog.open) return;
@@ -278,7 +278,7 @@ export async function openAnime(id) {
             const watch = $("[data-watch]", body);
             if (p && watch) {
                 watch.href = `/watch?id=${encodeURIComponent(anime.id)}&ep=${p.episode}`;
-                $("span", watch).textContent = `Continuar EP ${p.episode}`;
+                $("span", watch).textContent = `Continue EP ${p.episode}`;
             }
         }).catch(() => {});
     }
@@ -297,7 +297,7 @@ export async function openAnime(id) {
 
 export function youtubeEmbed(videoId, title, { autoplay = false } = {}) {
     const src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?rel=0&modestbranding=1${autoplay ? "&autoplay=1" : ""}`;
-    return `<iframe src="${src}" title="Trailer de ${esc(title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+    return `<iframe src="${src}" title="${esc(title)} trailer" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
 }
 
 export function closeModal() {
@@ -320,9 +320,9 @@ export function initModal() {
 }
 
 export const GENRES = [
-    ["action", "Ação"], ["adventure", "Aventura"], ["comedy", "Comédia"], ["drama", "Drama"],
-    ["fantasy", "Fantasia"], ["romance", "Romance"], ["isekai", "Isekai"], ["mystery", "Mistério"],
-    ["horror", "Terror"], ["psychological", "Psicológico"], ["sci-fi", "Ficção científica"],
-    ["slice-of-life", "Slice of life"], ["sports", "Esportes"], ["supernatural", "Sobrenatural"], ["mecha", "Mecha"],
+    ["action", "Action"], ["adventure", "Adventure"], ["comedy", "Comedy"], ["drama", "Drama"],
+    ["fantasy", "Fantasy"], ["romance", "Romance"], ["isekai", "Isekai"], ["mystery", "Mystery"],
+    ["horror", "Horror"], ["psychological", "Psychological"], ["sci-fi", "Sci-fi"],
+    ["slice-of-life", "Slice of life"], ["sports", "Sports"], ["supernatural", "Supernatural"], ["mecha", "Mecha"],
 ];
 export const genreName = (slug) => GENRES.find(([s]) => s === slug)?.[1];

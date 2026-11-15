@@ -28,12 +28,12 @@ function require_user()
 
     $token = get_bearer_token();
     if (!$token) {
-        $res->fail('Faça login para continuar', 401);
+        $res->fail('Log in to continue', 401);
     }
 
     $decoded = (new JwtAuth())->validate_token($token);
     if (!$decoded) {
-        $res->fail('Sessão expirada, entre de novo', 401);
+        $res->fail('Session expired, please log in again', 401);
     }
 
     return $decoded;

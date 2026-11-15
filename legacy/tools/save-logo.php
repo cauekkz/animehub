@@ -1,7 +1,7 @@
     
     <?php
 
-    function buscarAnimeAleatorio()
+    function fetchRandomAnime()
     {
         $id = rand(1, 200000);
         $url = "https://api.jikan.moe/v4/anime/{$id}";
@@ -12,18 +12,18 @@
         if (isset($data['data']['title'])) {
             return $data['data']['title'];
         } else {
-            return buscarAnimeAleatorio($id);
+            return fetchRandomAnime($id);
         }
     }
 
 
 
 
-    function buscarImagensGoogle()
+    function fetchGoogleLogo()
     {
 
 
-        $anime_name = buscarAnimeAleatorio();
+        $anime_name = fetchRandomAnime();
         $querystr = "$anime_name logo transparent";
         $query = urlencode($querystr);
         $url = "https://www.google.com/search?tbm=isch&q=$query&tbs=ic:trans,isz:m";
@@ -36,7 +36,7 @@
         curl_close($ch);
 
         if (!$html) {
-            die("Erro ao buscar página do Google.");
+            die("Error fetching the Google page.");
         }
 
         preg_match_all('/<img[^>]+src=["\']([^"\']+)["\']/i', $html, $matches);
@@ -54,7 +54,7 @@
         
     }
 
-    buscarImagensGoogle();
+    fetchGoogleLogo();
     header("Location: " . $_SERVER['PHP_SELF'] . "?refresh=1");
 
     ?>

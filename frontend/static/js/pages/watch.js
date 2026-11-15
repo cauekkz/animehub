@@ -7,11 +7,11 @@ const PAGE = 20;
 
 function streamsHTML(anime, ep) {
     if (!anime.streams.length) {
-        return `<p class="muted small">Ainda não temos link oficial para este título. Procure no serviço de streaming que você assina.</p>`;
+        return `<p class="muted small">We don't have an official link for this title yet. Check the streaming service you subscribe to.</p>`;
     }
     return anime.streams.map((s, i) => `
         <a class="btn ${i === 0 ? "btn-accent" : "btn-ghost"}" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">
-            ${icon("play")}<span>${anime.subtype === "movie" ? "Assistir" : `Assistir EP ${ep}`} ${i === 0 ? "na" : "no"} ${esc(s.site)}</span>${icon("external", "i-sm")}
+            ${icon("play")}<span>${anime.subtype === "movie" ? "Watch" : `Watch EP ${ep}`} on ${esc(s.site)}</span>${icon("external", "i-sm")}
         </a>`).join("");
 }
 
@@ -23,11 +23,11 @@ function gateHTML(anime) {
         ${img ? `<img class="gate-bg" src="${esc(img)}" alt="">` : ""}
         <div class="gate-card">
             <p class="eyebrow">${anime ? esc(anime.title) : "AnimeHub"}</p>
-            <h1>Entre para assistir</h1>
-            <p class="muted">Com uma conta, o AnimeHub lembra o episódio em que você parou e guarda sua lista.</p>
+            <h1>Log in to watch</h1>
+            <p class="muted">With an account, AnimeHub remembers the episode you stopped at and keeps your list.</p>
             <div class="actions">
-                <a class="btn btn-primary" href="/login?next=${next}">Entrar</a>
-                <a class="btn btn-ghost" href="/signup?next=${next}">Criar conta</a>
+                <a class="btn btn-primary" href="/login?next=${next}">Log in</a>
+                <a class="btn btn-ghost" href="/signup?next=${next}">Create account</a>
             </div>
         </div>
     </div>`;
@@ -38,7 +38,7 @@ export default async function watch(root, params) {
     const id = params.get("id");
 
     if (!id || !/^\d+$/.test(id)) {
-        box.innerHTML = `<div class="empty page-narrow"><h1>Anime não encontrado</h1><p>Escolha um título no <a href="/catalog">catálogo</a>.</p></div>`;
+        box.innerHTML = `<div class="empty page-narrow"><h1>Anime not found</h1><p>Pick a title from the <a href="/catalog">catalog</a>.</p></div>`;
         return;
     }
 
@@ -46,7 +46,7 @@ export default async function watch(root, params) {
     try {
         anime = remember(await kitsu.details(id));
     } catch {
-        box.innerHTML = `<div class="empty page-narrow"><h1>Não deu para carregar</h1><p>Confira sua conexão e <a href="${location.pathname + location.search}">tente de novo</a>.</p></div>`;
+        box.innerHTML = `<div class="empty page-narrow"><h1>Couldn't load this</h1><p>Check your connection and <a href="${location.pathname + location.search}">try again</a>.</p></div>`;
         return;
     }
     if (!root.isConnected) return;
@@ -74,22 +74,22 @@ export default async function watch(root, params) {
                 <div class="ep-now" data-ep-now aria-live="polite"></div>
 
                 <div class="ep-nav" ${isMovie ? "hidden" : ""}>
-                    <button class="btn btn-ghost btn-sm" type="button" data-step="-1">${icon("left")}<span>Anterior</span></button>
-                    <button class="btn btn-ghost btn-sm" type="button" data-step="1"><span>Próximo</span>${icon("right")}</button>
+                    <button class="btn btn-ghost btn-sm" type="button" data-step="-1">${icon("left")}<span>Previous</span></button>
+                    <button class="btn btn-ghost btn-sm" type="button" data-step="1"><span>Next</span>${icon("right")}</button>
                 </div>
 
                 <div class="watch-cta" data-streams></div>
                 <button class="btn btn-ghost btn-block" type="button" data-list-btn></button>
 
-                <p class="legal small">O AnimeHub não hospeda episódios. Os links levam às plataformas oficiais, que licenciam e pagam os estúdios.</p>
+                <p class="legal small">AnimeHub doesn't host episodes. The links go to the official platforms, which license and pay the studios.</p>
             </aside>
         </div>
 
         <section class="episodes" aria-labelledby="eps-title" ${isMovie ? "hidden" : ""}>
             <header class="rail-head">
-                <h2 id="eps-title">Episódios</h2>
+                <h2 id="eps-title">Episodes</h2>
                 <label class="range-select" hidden>
-                    <span class="sr-only">Faixa de episódios</span>
+                    <span class="sr-only">Episode range</span>
                     <select data-range></select>
                 </label>
             </header>
@@ -145,9 +145,9 @@ export default async function watch(root, params) {
                     <span class="ep-thumb">
                         ${e.thumbnail ? `<img src="${esc(e.thumbnail)}" alt="" loading="lazy" decoding="async" onerror="this.remove()">` : ""}
                         <span class="ep-num mono">${String(e.number).padStart(2, "0")}</span>
-                        ${e.number === ep ? `<span class="ep-badge">Atual</span>` : ""}
+                        ${e.number === ep ? `<span class="ep-badge">Current</span>` : ""}
                     </span>
-                    <span class="ep-title">${esc(e.title || `Episódio ${e.number}`)}</span>
+                    <span class="ep-title">${esc(e.title || `Episode ${e.number}`)}</span>
                     ${e.length ? `<span class="ep-len muted small">${e.length} min</span>` : ""}
                 </a>
             </li>`).join("");
@@ -159,9 +159,9 @@ export default async function watch(root, params) {
         if (found) nowEp = found;
         const e = nowEp?.number === ep ? nowEp : null;
         now.innerHTML = isMovie
-            ? `<p class="eyebrow">Filme</p><h1 class="ep-heading">${esc(anime.title)}</h1><p class="ep-synopsis">${esc(anime.synopsis)}</p>`
-            : `<p class="eyebrow mono">Episódio ${String(ep).padStart(2, "0")}${total ? ` de ${total}` : ""}</p>
-               <h1 class="ep-heading">${esc(e?.title || `Episódio ${ep}`)}</h1>
+            ? `<p class="eyebrow">Movie</p><h1 class="ep-heading">${esc(anime.title)}</h1><p class="ep-synopsis">${esc(anime.synopsis)}</p>`
+            : `<p class="eyebrow mono">Episode ${String(ep).padStart(2, "0")}${total ? ` of ${total}` : ""}</p>
+               <h1 class="ep-heading">${esc(e?.title || `Episode ${ep}`)}</h1>
                ${e?.synopsis ? `<p class="ep-synopsis">${esc(e.synopsis)}</p>` : ""}`;
         $("[data-streams]", box).innerHTML = streamsHTML(anime, ep);
         renderPlayer(e);
@@ -188,7 +188,7 @@ export default async function watch(root, params) {
         if (offset !== pageOffset) await loadPage(offset);
         else renderList();
         progress.save(anime, ep).catch((err) => {
-            if (err.status !== 401) toast("Não foi possível salvar seu progresso", { tone: "error" });
+            if (err.status !== 401) toast("Couldn't save your progress", { tone: "error" });
         });
     }
 

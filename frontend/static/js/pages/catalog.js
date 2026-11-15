@@ -14,26 +14,26 @@ export default async function catalog(root, params) {
 
     let load;
     if (q) {
-        eyebrow.textContent = "Busca";
-        title.innerHTML = `Resultados para <q>${esc(q)}</q>`;
+        eyebrow.textContent = "Search";
+        title.innerHTML = `Results for <q>${esc(q)}</q>`;
         document.title = `${q} · AnimeHub`;
         load = (offset) => kitsu.search(q, { offset });
         const input = document.querySelector("#search-input");
         if (input) input.value = q;
     } else if (genre) {
-        eyebrow.textContent = "Gênero";
+        eyebrow.textContent = "Genre";
         title.textContent = genreName(genre) ?? genre.replace(/-/g, " ");
         document.title = `${title.textContent} · AnimeHub`;
         load = (offset) => kitsu.byCategory(genre, { offset });
     } else if (status === "current") {
-        eyebrow.textContent = "Agora";
-        title.textContent = "Em exibição";
+        eyebrow.textContent = "Now";
+        title.textContent = "Airing now";
         load = (offset) => kitsu.popular({ offset, status: "current" });
     } else {
         load = (offset) => kitsu.popular({ offset });
     }
 
-    $("[data-chips]", root).innerHTML = [["", "Todos"], ...GENRES].map(([slug, name]) => {
+    $("[data-chips]", root).innerHTML = [["", "All"], ...GENRES].map(([slug, name]) => {
         const href = slug ? `/catalog?genre=${slug}` : "/catalog";
         const active = (slug || null) === (genre || null) && !q && !status;
         return `<li><a class="chip" href="${href}"${active ? ' aria-current="page"' : ""}>${esc(name)}</a></li>`;
@@ -44,7 +44,7 @@ export default async function catalog(root, params) {
 
     async function page() {
         more.disabled = true;
-        more.textContent = "Carregando…";
+        more.textContent = "Loading…";
         if (offset === 0) grid.innerHTML = skeletonCards(12);
         try {
             const res = await load(offset);
@@ -57,18 +57,18 @@ export default async function catalog(root, params) {
 
             if (!grid.children.length) {
                 grid.innerHTML = `<li class="empty">
-                    <h2>Nada encontrado</h2>
-                    <p>${q ? "Tente o nome em inglês ou em japonês (romaji). Ex: <em>Kimetsu no Yaiba</em>." : "Não há títulos aqui ainda."}</p>
+                    <h2>Nothing found</h2>
+                    <p>${q ? "Try the English or Japanese (romaji) title. E.g. <em>Kimetsu no Yaiba</em>." : "There are no titles here yet."}</p>
                 </li>`;
             }
-            count.textContent = total ? `${total.toLocaleString("pt-BR")} ${total === 1 ? "título" : "títulos"}` : "";
+            count.textContent = total ? `${total.toLocaleString("en-US")} ${total === 1 ? "title" : "titles"}` : "";
             more.hidden = offset >= total || res.items.length === 0;
         } catch {
-            if (offset === 0) grid.innerHTML = `<li class="empty"><h2>Não deu para carregar</h2><p>Confira sua conexão e tente de novo.</p></li>`;
+            if (offset === 0) grid.innerHTML = `<li class="empty"><h2>Couldn't load this</h2><p>Check your connection and try again.</p></li>`;
             more.hidden = false;
         } finally {
             more.disabled = false;
-            more.textContent = "Carregar mais";
+            more.textContent = "Load more";
         }
     }
 

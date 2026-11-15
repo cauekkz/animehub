@@ -17,7 +17,7 @@ date_default_timezone_set('America/Sao_Paulo');
 $res = new Response();
 
 if (!API_ACTIVE) {
-    $res->fail(API_MESSAGE ?: 'API em manutenção', 503);
+    $res->fail(API_MESSAGE ?: 'API under maintenance', 503);
 }
 
 $db = new Database([

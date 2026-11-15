@@ -9,11 +9,11 @@ import { login, signup } from "./pages/auth.js";
 
 const routes = {
     "/": { html: "home", init: home, title: "AnimeHub", nav: "home" },
-    "/catalog": { html: "catalog", init: catalog, title: "Catálogo", nav: "catalog" },
-    "/watch": { html: "watch", init: watch, title: "Assistir" },
-    "/list": { html: "list", init: list, title: "Minha lista", nav: "list" },
-    "/login": { html: "login", init: login, title: "Entrar" },
-    "/signup": { html: "signup", init: signup, title: "Criar conta" },
+    "/catalog": { html: "catalog", init: catalog, title: "Catalog", nav: "catalog" },
+    "/watch": { html: "watch", init: watch, title: "Watch" },
+    "/list": { html: "list", init: list, title: "My list", nav: "list" },
+    "/login": { html: "login", init: login, title: "Log in" },
+    "/signup": { html: "signup", init: signup, title: "Create account" },
 };
 const aliases = { "/home": "/", "/player": "/watch" };
 
@@ -55,7 +55,7 @@ async function render() {
     try {
         html = await fetchPage(route?.html ?? "404");
     } catch {
-        html = `<section class="page-narrow empty"><h1>Sem conexão</h1><p>Não foi possível carregar a página.</p></section>`;
+        html = `<section class="page-narrow empty"><h1>No connection</h1><p>Couldn't load the page.</p></section>`;
     }
     if (id !== renderId) return;
 
@@ -68,7 +68,7 @@ async function render() {
             cleanup = await route.init(app, new URLSearchParams(location.search));
         } catch (err) {
             console.error(err);
-            toast("Algo deu errado ao abrir esta página", { tone: "error" });
+            toast("Something went wrong opening this page", { tone: "error" });
         }
     }
     updateHeader();
@@ -157,7 +157,7 @@ document.addEventListener("keydown", (e) => {
 $$("[data-action='logout']").forEach(b => b.addEventListener("click", () => {
     session.clear();
     setAccountMenu(false);
-    toast("Você saiu da sua conta");
+    toast("You've logged out");
     navigate("/");
 }));
 

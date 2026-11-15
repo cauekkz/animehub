@@ -12,11 +12,11 @@ const isHttp = (url) => {
 const guessType = (url) => (/\.(mp4|webm|ogv|m4v)(\?|#|$)/i.test(url) ? "video" : "iframe");
 
 export function playerLoadingHTML() {
-    return `<div class="stage-frame player-loading"><span class="spinner" aria-label="Carregando episódio"></span></div>`;
+    return `<div class="stage-frame player-loading"><span class="spinner" aria-label="Loading episode"></span></div>`;
 }
 
 export function playerHTML(source, { anime, ep, poster }) {
-    const label = anime.subtype === "movie" ? anime.title : `${anime.title} · Episódio ${ep}`;
+    const label = anime.subtype === "movie" ? anime.title : `${anime.title} · Episode ${ep}`;
     const type = source.type || guessType(source.url);
 
     const frame = type === "video"
@@ -37,16 +37,16 @@ export function playerEmptyHTML({ anime, ep, poster }) {
             ${poster ? `<img src="${esc(poster)}" alt="" onerror="this.remove()">` : ""}
             <div class="player-empty-body">
                 <span class="player-empty-icon">${icon("play")}</span>
-                <p class="player-empty-title">${isMovie ? "Filme" : `Episódio ${ep}`} ainda sem vídeo</p>
-                <p class="player-empty-text">Quando a fonte estiver ligada, o player aparece aqui.</p>
-                ${anime.youtube ? `<button class="btn btn-ghost btn-sm" type="button" data-play-trailer>${icon("film")}<span>Ver trailer</span></button>` : ""}
+                <p class="player-empty-title">${isMovie ? "Movie" : `Episode ${ep}`} has no video yet</p>
+                <p class="player-empty-text">Once a video source is hooked up, the player shows up here.</p>
+                ${anime.youtube ? `<button class="btn btn-ghost btn-sm" type="button" data-play-trailer>${icon("film")}<span>Watch trailer</span></button>` : ""}
             </div>
         </div>`;
 }
 
 export function trailerHTML(anime) {
     return `<div class="stage-frame">${youtubeEmbed(anime.youtube, anime.title, { autoplay: true })}</div>
-            <p class="stage-label">${icon("film")} Trailer oficial</p>`;
+            <p class="stage-label">${icon("film")} Official trailer</p>`;
 }
 
 export function mountPlayer(stage, { anime, ep, poster, onEnded }) {
@@ -56,7 +56,7 @@ export function mountPlayer(stage, { anime, ep, poster, onEnded }) {
     (async () => {
         let source = null;
         try { source = await getEpisodeSource(anime, ep); }
-        catch (err) { console.error("Fonte do episódio falhou:", err); }
+        catch (err) { console.error("Episode source failed:", err); }
         if (cancelled || !stage.isConnected) return;
 
         if (source?.url && isHttp(source.url)) {

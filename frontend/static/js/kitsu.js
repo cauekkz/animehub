@@ -24,7 +24,7 @@ async function request(path, params, { retries = 2 } = {}) {
                 await new Promise(r => setTimeout(r, 800 * (attempt + 1)));
                 continue;
             }
-            throw new Error(`Kitsu respondeu ${res.status}`);
+            throw new Error(`Kitsu responded ${res.status}`);
         }
     })();
 
@@ -43,7 +43,7 @@ export function normalize(item) {
 
     return {
         id: item.id,
-        title: t.en || t.en_us || a.canonicalTitle || t.en_jp || t.ja_jp || "Sem título",
+        title: t.en || t.en_us || a.canonicalTitle || t.en_jp || t.ja_jp || "Untitled",
         altTitle: t.ja_jp || t.en_jp || "",
         romaji: t.en_jp || a.canonicalTitle || "",
         synopsis: (a.synopsis || "").split(/\n\n|\(Source:/)[0].trim(),
@@ -122,7 +122,7 @@ export async function details(id) {
         .filter(i => i.type === "streamingLinks")
         .map(i => ({
             url: i.attributes.url.startsWith("http") ? i.attributes.url : `https://${i.attributes.url}`,
-            site: streamers.get(i.relationships?.streamer?.data?.id) || "Site oficial",
+            site: streamers.get(i.relationships?.streamer?.data?.id) || "Official site",
         }))
         .filter(s => /^https?:\/\//.test(s.url));
 

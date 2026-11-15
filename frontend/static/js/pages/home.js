@@ -17,9 +17,9 @@ const HERO_POOL = [
 ];
 
 const RAILS = [
-    ["action", "Ação"], ["romance", "Romance"], ["comedy", "Comédia"], ["adventure", "Aventura"],
-    ["isekai", "Isekai"], ["mystery", "Mistério"], ["horror", "Terror"], ["drama", "Drama"],
-    ["sports", "Esportes"], ["psychological", "Psicológico"],
+    ["action", "Action"], ["romance", "Romance"], ["comedy", "Comedy"], ["adventure", "Adventure"],
+    ["isekai", "Isekai"], ["mystery", "Mystery"], ["horror", "Horror"], ["drama", "Drama"],
+    ["sports", "Sports"], ["psychological", "Psychological"],
 ];
 
 const SLIDE_MS = 9000;
@@ -62,7 +62,7 @@ async function setupHero(root) {
     if (!root.isConnected) return () => {};
     if (!slides.length) {
         hero.classList.add("is-empty");
-        body.innerHTML = `<h1 class="hero-fallback">Seu próximo anime está aqui.</h1>`;
+        body.innerHTML = `<h1 class="hero-fallback">Your next anime is right here.</h1>`;
         return () => {};
     }
     slides.forEach(s => remember(s.anime));
@@ -101,8 +101,8 @@ async function setupHero(root) {
             <p class="hero-meta">${ageBadge(anime.ageRating)}${metaLine(anime)}${anime.rating ? `<span class="score">${icon("star")}${anime.rating}</span>` : ""}</p>
             <p class="hero-synopsis">${esc(anime.synopsis)}</p>
             <div class="actions">
-                <a class="btn btn-primary btn-lg" href="/watch?id=${encodeURIComponent(anime.id)}">${icon("play")}<span>Assistir</span></a>
-                <button class="btn btn-ghost btn-lg" type="button" data-open-anime="${esc(anime.id)}">${icon("info")}<span>Mais informações</span></button>
+                <a class="btn btn-primary btn-lg" href="/watch?id=${encodeURIComponent(anime.id)}">${icon("play")}<span>Watch</span></a>
+                <button class="btn btn-ghost btn-lg" type="button" data-open-anime="${esc(anime.id)}">${icon("info")}<span>More info</span></button>
             </div>`;
         requestAnimationFrame(() => body.classList.add("is-in"));
 
@@ -152,7 +152,7 @@ async function continueRail(container) {
     section.className = "rail rail-continue";
     section.setAttribute("aria-labelledby", "rail-continue");
     section.innerHTML = `
-        <header class="rail-head"><h2 id="rail-continue">Continuar assistindo${name ? `, ${esc(name)}` : ""}</h2></header>
+        <header class="rail-head"><h2 id="rail-continue">Continue watching${name ? `, ${esc(name)}` : ""}</h2></header>
         <div class="rail-viewport"><ul class="rail-track">${items.map(continueCardHTML).join("")}</ul></div>`;
 
     section.addEventListener("click", async (e) => {
@@ -176,7 +176,7 @@ export default async function home(root) {
 
     rails.append(createRail({
         id: "trending",
-        title: "Em alta agora",
+        title: "Trending now",
         ranked: true,
         eager: true,
         max: 10,
@@ -184,7 +184,7 @@ export default async function home(root) {
     }));
     rails.append(createRail({
         id: "airing",
-        title: "Em exibição",
+        title: "Airing now",
         href: "/catalog?status=current",
         eager: true,
         load: (offset) => kitsu.popular({ offset, status: "current" }),

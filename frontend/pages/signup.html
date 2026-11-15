@@ -2,15 +2,15 @@
     <div class="auth-art" aria-hidden="true" data-auth-art></div>
 
     <div class="auth-panel">
-        <p class="eyebrow">É de graça</p>
-        <h1>Criar conta</h1>
-        <p class="muted">Salve sua lista e acompanhe cada episódio.</p>
+        <p class="eyebrow">It's free</p>
+        <h1>Create account</h1>
+        <p class="muted">Save your list and keep track of every episode.</p>
 
         <form class="form" novalidate data-form>
             <div class="form-error" role="alert" hidden data-form-error></div>
 
             <div class="field">
-                <label for="name">Nome</label>
+                <label for="name">Name</label>
                 <input id="name" name="name" type="text" autocomplete="name" minlength="3" maxlength="70" required>
                 <p class="field-error" id="name-error" hidden></p>
             </div>
@@ -22,24 +22,24 @@
             </div>
 
             <div class="field">
-                <label for="password">Senha</label>
+                <label for="password">Password</label>
                 <div class="password">
                     <input id="password" name="password" type="password" autocomplete="new-password" minlength="8" maxlength="72" required aria-describedby="password-hint">
-                    <button type="button" class="reveal" aria-label="Mostrar senha" aria-pressed="false" data-reveal="password">Mostrar</button>
+                    <button type="button" class="reveal" aria-label="Show password" aria-pressed="false" data-reveal="password">Show</button>
                 </div>
-                <p class="field-hint" id="password-hint">Pelo menos 8 caracteres.</p>
+                <p class="field-hint" id="password-hint">At least 8 characters.</p>
                 <p class="field-error" id="password-error" hidden></p>
             </div>
 
             <div class="field">
-                <label for="conf_password">Confirmar senha</label>
+                <label for="conf_password">Confirm password</label>
                 <input id="conf_password" name="conf_password" type="password" autocomplete="new-password" required>
                 <p class="field-error" id="conf_password-error" hidden></p>
             </div>
 
-            <button class="btn btn-primary btn-block btn-lg" type="submit">Criar conta</button>
+            <button class="btn btn-primary btn-block btn-lg" type="submit">Create account</button>
         </form>
 
-        <p class="auth-switch">Já tem conta? <a href="/login" data-keep-next>Entrar</a></p>
+        <p class="auth-switch">Already have an account? <a href="/login" data-keep-next>Log in</a></p>
     </div>
 </section>

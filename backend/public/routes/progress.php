@@ -13,7 +13,7 @@ if ($method === 'GET') {
         ['u' => $user_id]
     );
     if ($response->status !== 'success') {
-        $res->fail('Erro ao carregar seu progresso', 500);
+        $res->fail('Error loading your progress', 500);
     }
     foreach ($response->results as $row) {
         $row->episode = (int) $row->episode;
@@ -29,7 +29,7 @@ if ($method === 'POST') {
     $count = filter_var($data['episode_count'] ?? null, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1, 'max_range' => 100000]]);
 
     if (!ctype_digit($anime_id) || $episode === false || empty($data['title'])) {
-        $res->fail('Dados inválidos', 422);
+        $res->fail('Invalid data', 422);
     }
 
     $response = $db->execute_non_query(
@@ -49,20 +49,20 @@ if ($method === 'POST') {
         ]
     );
     if ($response->status !== 'success') {
-        $res->fail('Não foi possível salvar o progresso', 500);
+        $res->fail("Couldn't save your progress", 500);
     }
     $res->ok(['anime_id' => $anime_id, 'episode' => $episode]);
 }
 
 $anime_id = (string) ($_GET['anime_id'] ?? '');
 if (!ctype_digit($anime_id)) {
-    $res->fail('Anime inválido', 422);
+    $res->fail('Invalid anime', 422);
 }
 $response = $db->execute_non_query(
     'DELETE FROM progress WHERE user_id = :u AND anime_id = :a',
     ['u' => $user_id, 'a' => $anime_id]
 );
 if ($response->status !== 'success') {
-    $res->fail('Não foi possível remover', 500);
+    $res->fail("Couldn't remove", 500);
 }
 $res->ok(['anime_id' => $anime_id]);

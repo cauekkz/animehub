@@ -9,7 +9,7 @@ $data = read_json_body();
 $errors = validateSignup($data);
 
 if (!empty($errors)) {
-    $res->fail('Confira os campos', 422, $errors);
+    $res->fail('Please check the fields', 422, $errors);
 }
 
 $name = trim($data['name']);
@@ -17,10 +17,10 @@ $email = mb_strtolower(trim($data['email']));
 
 $exists = $db->execute_query('SELECT id FROM `user` WHERE email = :email', ['email' => $email]);
 if ($exists->status !== 'success') {
-    $res->fail('Não foi possível criar a conta agora', 500);
+    $res->fail("Couldn't create the account right now", 500);
 }
 if (!empty($exists->results)) {
-    $res->fail('Esse email já tem uma conta', 409, ['email' => 'Esse email já tem uma conta. Quer entrar?']);
+    $res->fail('This email already has an account', 409, ['email' => 'This email already has an account. Want to log in?']);
 }
 
 $response = $db->execute_non_query(
@@ -29,7 +29,7 @@ $response = $db->execute_non_query(
 );
 
 if ($response->status !== 'success') {
-    $res->fail('Não foi possível criar a conta agora', 500);
+    $res->fail("Couldn't create the account right now", 500);
 }
 
 $user = (object) ['id' => $response->last_id, 'name' => $name, 'email' => $email];

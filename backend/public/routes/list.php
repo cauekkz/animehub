@@ -12,7 +12,7 @@ if ($method === 'GET') {
         ['u' => $user_id]
     );
     if ($response->status !== 'success') {
-        $res->fail('Erro ao carregar sua lista', 500);
+        $res->fail('Error loading your list', 500);
     }
     $res->ok($response->results);
 }
@@ -22,7 +22,7 @@ if ($method === 'POST') {
     $anime_id = (string) ($data['anime_id'] ?? '');
 
     if (!ctype_digit($anime_id) || empty($data['title'])) {
-        $res->fail('Anime inválido', 422);
+        $res->fail('Invalid anime', 422);
     }
 
     $response = $db->execute_non_query(
@@ -31,7 +31,7 @@ if ($method === 'POST') {
         ['u' => $user_id, 'a' => $anime_id, 't' => clip($data['title'], 255), 'p' => safe_url($data['poster'] ?? '')]
     );
     if ($response->status !== 'success') {
-        $res->fail('Não foi possível salvar', 500);
+        $res->fail("Couldn't save", 500);
     }
     $res->set_http_code(201);
     $res->ok(['anime_id' => $anime_id]);
@@ -39,13 +39,13 @@ if ($method === 'POST') {
 
 $anime_id = (string) ($_GET['anime_id'] ?? '');
 if (!ctype_digit($anime_id)) {
-    $res->fail('Anime inválido', 422);
+    $res->fail('Invalid anime', 422);
 }
 $response = $db->execute_non_query(
     'DELETE FROM watchlist WHERE user_id = :u AND anime_id = :a',
     ['u' => $user_id, 'a' => $anime_id]
 );
 if ($response->status !== 'success') {
-    $res->fail('Não foi possível remover', 500);
+    $res->fail("Couldn't remove", 500);
 }
 $res->ok(['anime_id' => $anime_id]);

@@ -4,11 +4,11 @@ function validatelogin($data)
     $errors = [];
 
     if (empty($data['email']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-        $errors['email'] = 'Digite um email válido';
+        $errors['email'] = 'Enter a valid email';
     }
 
     if (empty($data['password'])) {
-        $errors['password'] = 'Digite sua senha';
+        $errors['password'] = 'Enter your password';
     }
 
     return $errors;

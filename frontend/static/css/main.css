@@ -1,6 +1,6 @@
 /* =========================================================
-   AnimeHub: tema escuro, um vermelho só (o sol do logo),
-   títulos condensados, cantos retos.
+   AnimeHub: dark theme, a single red (the sun from the logo),
+   condensed headings, square corners.
    ========================================================= */
 
 :root {
@@ -93,14 +93,14 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 }
 .link { background: none; border: 0; padding: 0; color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
 
-/* ---------- ícones ---------- */
+/* ---------- icons ---------- */
 .i {
     width: 1.15em; height: 1.15em; flex: none;
     fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
 }
 .i-sm { width: .9em; height: .9em; opacity: .7; }
 
-/* ---------- botões ---------- */
+/* ---------- buttons ---------- */
 .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: .5em;
     min-height: 44px; padding: 0 1.15em;
@@ -134,7 +134,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 
 .actions { display: flex; flex-wrap: wrap; gap: 10px; }
 
-/* ---------- selos ---------- */
+/* ---------- badges ---------- */
 .age {
     display: inline-grid; place-items: center;
     min-width: 26px; height: 22px; padding: 0 4px;
@@ -162,7 +162,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .chip:hover { color: var(--text); border-color: var(--text-3); }
 .chip[aria-current] { background: var(--text); border-color: var(--text); color: var(--bg); font-weight: 600; }
 
-/* ---------- carregando ---------- */
+/* ---------- loading ---------- */
 @keyframes shimmer { to { background-position: -200% 0; } }
 .sk-line, .sk-block, .is-skeleton .card-poster, .is-skeleton .ep-thumb {
     background: linear-gradient(90deg, var(--surface) 0%, var(--surface-2) 50%, var(--surface) 100%) 0 0 / 200% 100%;
@@ -267,7 +267,7 @@ body:not([data-page="home"]) .site-header {
 
 .burger { display: none; margin-left: -10px; }
 
-/* barra de gêneros embaixo do header */
+/* genre bar under the header */
 .genre-bar { padding: 0 var(--gutter); border-top: 1px solid transparent; }
 .site-header[data-scrolled="true"] .genre-bar, body:not([data-page="home"]) .genre-bar { border-top-color: var(--line); }
 .genre-bar ul {
@@ -285,7 +285,7 @@ body:not([data-page="home"]) .site-header {
 .genre-bar a[aria-current] { color: var(--accent); }
 body[data-page="login"] .genre-bar, body[data-page="signup"] .genre-bar { display: none; }
 
-/* ---------- menu do celular ---------- */
+/* ---------- mobile menu ---------- */
 .drawer { position: fixed; inset: 0; z-index: 60; }
 .drawer-scrim { position: absolute; inset: 0; background: rgba(0, 0, 0, .6); opacity: 0; transition: opacity var(--t-med); }
 .drawer-panel {
@@ -313,7 +313,7 @@ body[data-page="login"] .genre-bar, body[data-page="signup"] .genre-bar { displa
 .drawer-user small { color: var(--text-3); font-weight: 400; }
 
 /* =========================================================
-   Layout geral
+   General layout
    ========================================================= */
 main { flex: 1; outline: none; }
 body:not([data-page="home"]) main { padding-top: calc(var(--header-h) + 72px); }
@@ -406,7 +406,7 @@ body:not([data-page="home"]) main { padding-top: calc(var(--header-h) + 72px); }
 @keyframes fill { to { width: 100%; } }
 
 /* =========================================================
-   Fileiras (rails) e cards
+   Rails and cards
    ========================================================= */
 .rails { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(36px, 5vw, 56px); padding: 8px 0 80px; position: relative; z-index: 1; }
 .hero + .rails { margin-top: -24px; }
@@ -484,7 +484,7 @@ body:not([data-page="home"]) main { padding-top: calc(var(--header-h) + 72px); }
 
 .card.is-skeleton .sk-line { margin-top: 10px; }
 
-/* Em alta: número grande ao lado do pôster */
+/* Trending: big number next to the poster */
 .rail-track.is-ranked { gap: 4px; }
 .card-ranked { width: calc(var(--card-w) * 1.46); position: relative; }
 .card-ranked .rank {
@@ -497,7 +497,7 @@ body:not([data-page="home"]) main { padding-top: calc(var(--header-h) + 72px); }
 .card-ranked:nth-child(-n+3) .rank { -webkit-text-stroke-color: var(--accent); }
 .card-ranked .card-hit { position: relative; z-index: 1; width: var(--card-w); margin-left: calc(var(--card-w) * .46); }
 
-/* Continuar assistindo */
+/* Continue watching */
 .card-wide { width: clamp(220px, 24vw, 320px); }
 .card-wide .card-poster { aspect-ratio: 16 / 9; }
 .card-play {
@@ -517,7 +517,7 @@ body:not([data-page="home"]) main { padding-top: calc(var(--header-h) + 72px); }
 .card-wide:hover .card-remove, .card-remove:focus-visible { opacity: 1; }
 @media (hover: none) { .card-remove { opacity: 1; } }
 
-/* ---------- grade (catálogo / lista) ---------- */
+/* ---------- grid (catalog / list) ---------- */
 .filter-chips { margin: 0 calc(var(--gutter) * -1) 28px; padding: 0 var(--gutter); overflow-x: auto; scrollbar-width: none; }
 .filter-chips .chips { flex-wrap: nowrap; }
 .grid {
@@ -528,7 +528,7 @@ body:not([data-page="home"]) main { padding-top: calc(var(--header-h) + 72px); }
 .grid-foot { display: flex; justify-content: center; margin-top: 40px; }
 
 /* =========================================================
-   Modal de detalhes
+   Details modal
    ========================================================= */
 .anime-modal {
     width: min(920px, calc(100vw - 32px)); max-height: calc(100dvh - 48px);
@@ -584,7 +584,7 @@ body:not([data-page="home"]) main { padding-top: calc(var(--header-h) + 72px); }
 .modal-loading, .modal-error { display: grid; place-items: center; min-height: 320px; padding: 40px; color: var(--text-2); }
 
 /* =========================================================
-   Assistir
+   Watch
    ========================================================= */
 .watch { padding: 0 var(--gutter) 80px; }
 .watch-loading { display: grid; place-items: center; min-height: 50vh; }
@@ -597,7 +597,7 @@ body:not([data-page="home"]) main { padding-top: calc(var(--header-h) + 72px); }
 .stage-still p { position: absolute; left: 24px; bottom: 20px; color: var(--text-2); }
 .stage-label { display: flex; align-items: center; gap: 8px; color: var(--text-3); font-size: .875rem; }
 
-/* Player do episódio */
+/* Episode player */
 .player-video { position: absolute; inset: 0; width: 100%; height: 100%; background: #000; }
 .player-loading { display: grid; place-items: center; }
 .player-empty img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .35; filter: blur(2px); transform: scale(1.03); }
@@ -665,7 +665,7 @@ body:not([data-page="home"]) main { padding-top: calc(var(--header-h) + 72px); }
 .ep.is-current .ep-title { color: var(--accent); }
 .ep.is-skeleton .sk-line { width: 70%; }
 
-/* Bloqueio de login */
+/* Login gate */
 .gate { position: relative; display: grid; place-items: center; min-height: 64vh; overflow: hidden; border-radius: var(--radius); }
 .gate-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .28; }
 .gate::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, var(--bg), rgba(12, 11, 10, .4)); }
@@ -673,7 +673,7 @@ body:not([data-page="home"]) main { padding-top: calc(var(--header-h) + 72px); }
 .gate-card h1 { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; font-size: clamp(2.4rem, 6vw, 3.6rem); line-height: .95; }
 
 /* =========================================================
-   Entrar / Criar conta
+   Log in / Create account
    ========================================================= */
 body[data-page="login"] main, body[data-page="signup"] main { padding-top: var(--header-h); }
 .auth { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(360px, 520px); min-height: calc(100dvh - var(--header-h)); }
@@ -734,7 +734,7 @@ body[data-page="login"] main, body[data-page="signup"] main { padding-top: var(-
 .toast-error { background: var(--danger); color: #1a0504; }
 
 /* =========================================================
-   Responsivo
+   Responsive
    ========================================================= */
 @media (max-width: 1100px) {
     .watch-top { grid-template-columns: 1fr; }
